@@ -16,21 +16,20 @@ export default function ProductCard({ product, onAdd }: { product: Product; onAd
   const [fav, setFav] = useState(false);
 
   return (
-    <div style={{background:'#fff',borderRadius:14,border:'1px solid #f0e0ee',cursor:'pointer',transition:'transform .2s,border-color .2s,box-shadow .2s',overflow:'hidden',width:160,flexShrink:0}}
-      onMouseEnter={e => {const d = e.currentTarget as HTMLDivElement; d.style.transform='translateY(-3px)'; d.style.borderColor='#E91E8C'; d.style.boxShadow='0 6px 20px rgba(233,30,140,.1)'}}
-      onMouseLeave={e => {const d = e.currentTarget as HTMLDivElement; d.style.transform=''; d.style.borderColor='#f0e0ee'; d.style.boxShadow=''}}
-    >
+    <a href={`/product/${product._id}`} style={{background:'#fff',borderRadius:14,border:'1px solid #f0e0ee',cursor:'pointer',transition:'transform .2s,border-color .2s,box-shadow .2s',overflow:'hidden',width:160,flexShrink:0,textDecoration:'none',display:'block',color:'inherit'}}
+      onMouseEnter={e => {const d=e.currentTarget as HTMLAnchorElement;d.style.transform='translateY(-3px)';d.style.borderColor='#E91E8C';d.style.boxShadow='0 6px 20px rgba(233,30,140,.1)'}}
+      onMouseLeave={e => {const d=e.currentTarget as HTMLAnchorElement;d.style.transform='';d.style.borderColor='#f0e0ee';d.style.boxShadow=''}}>
+
       <div style={{height:110,display:'flex',alignItems:'center',justifyContent:'center',background:'#fff0f9',position:'relative',borderRadius:'14px 14px 0 0',overflow:'hidden'}}>
         {product.image && product.image !== 'no_image'
           ? <img src={product.image} alt={product.name} style={{width:'100%',height:'100%',objectFit:'contain',padding:10}} />
-          : <span style={{fontSize:44}}>🛍️</span>
-        }
+          : <span style={{fontSize:44}}>🛍️</span>}
         {product.discount && (
           <span style={{position:'absolute',top:8,right:8,background:'#E91E8C',color:'#fff',fontSize:10,fontWeight:700,padding:'2px 6px',borderRadius:20}}>
             -{product.discount}%
           </span>
         )}
-        <button onClick={e => {e.stopPropagation(); setFav(!fav)}}
+        <button onClick={e => {e.preventDefault();e.stopPropagation();setFav(!fav)}}
           style={{position:'absolute',top:6,left:6,background:'#fff',border:'none',cursor:'pointer',width:26,height:26,borderRadius:'50%',display:'flex',alignItems:'center',justifyContent:'center',fontSize:14,color: fav ? '#E91E8C' : '#ddd'}}>
           {fav ? '♥' : '♡'}
         </button>
@@ -49,12 +48,12 @@ export default function ProductCard({ product, onAdd }: { product: Product; onAd
             {product.old_price && <small style={{fontSize:11,color:'#bbb',textDecoration:'line-through',marginLeft:4}}>{product.old_price} ج</small>}
             <span style={{fontSize:15,fontWeight:700,color:'#E91E8C'}}>{product.price} ج</span>
           </div>
-          <button onClick={() => onAdd(product.name)}
-            style={{width:28,height:28,background:'#E91E8C',color:'#fff',border:'none',borderRadius:8,fontSize:20,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'inherit',transition:'background .2s'}}>
+          <button onClick={e => {e.preventDefault();e.stopPropagation();onAdd(product.name)}}
+            style={{width:28,height:28,background:'#E91E8C',color:'#fff',border:'none',borderRadius:8,fontSize:20,cursor:'pointer',display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'inherit'}}>
             +
           </button>
         </div>
       </div>
-    </div>
+    </a>
   );
 }
