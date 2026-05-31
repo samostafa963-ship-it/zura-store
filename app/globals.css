@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --pink: #E91E8C;
+  --pink-dark: #C4167A;
+  --pink-light: #fce8f5;
+  --pink-bg: #fff0f9;
+  --gray: #f5f5f5;
+  --border: #f0e0ee;
+  --text: #1a1a1a;
+  --muted: #888;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  background: var(--gray);
+  color: var(--text);
+  direction: rtl;
+  font-size: 14px;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: #f0c8e8; border-radius: 4px; }
