@@ -64,6 +64,11 @@ export default function ProductPage() {
     ? Math.round(((product.old_price - product.price) / product.old_price) * 100)
     : null;
 
+  const rating = product.rating || 4.8;
+  const reviewsCount = product.reviews_count || 256;
+  const fullStars = Math.floor(rating);
+  const hasHalf = rating - fullStars >= 0.5;
+
   return (
     <>
       <Navbar />
@@ -97,7 +102,6 @@ export default function ProductPage() {
 
             {/* ---- LEFT: Images ---- */}
             <div>
-              {/* Main Image */}
               <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #f0e0ee', position: 'relative', overflow: 'hidden', aspectRatio: '1', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
                 {discount && (
                   <div style={{ position: 'absolute', top: 14, right: 14, background: '#E91E8C', color: '#fff', fontSize: 12, fontWeight: 700, padding: '4px 10px', borderRadius: 20, zIndex: 2 }}>
@@ -129,7 +133,6 @@ export default function ProductPage() {
                 </div>
               </div>
 
-              {/* Thumbnails */}
               {images.length > 1 && (
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
                   {images.map((img: string, i: number) => (
@@ -141,7 +144,6 @@ export default function ProductPage() {
                   ))}
                 </div>
               )}
-              {/* Single image thumbnails placeholders like in the design */}
               {images.length === 1 && (
                 <div style={{ display: 'flex', gap: 10 }}>
                   {[0, 1, 2, 3, 4].map(i => (
@@ -155,23 +157,38 @@ export default function ProductPage() {
             </div>
 
             {/* ---- RIGHT: Info ---- */}
-            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #f0e0ee', padding: '28px 24px', display: 'flex', flexDirection: 'column', gap: 0 }}>
+            <div style={{ background: '#fff', borderRadius: 16, border: '1px solid #f0e0ee', padding: '28px 24px', display: 'flex', flexDirection: 'column' }}>
 
-              {/* Rating */}
+              {/* Badge + best seller */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 10 }}>
-                <span style={{ color: '#f59e0b', fontSize: 16 }}>★</span>
-                <span style={{ fontSize: 14, fontWeight: 700, color: '#333' }}>{product.rating || '4.8'}</span>
-                <span style={{ fontSize: 13, color: '#aaa' }}>({product.reviews_count || '256'} تقييم)</span>
-                {product.is_best_seller && (
-                  <span style={{ marginRight: 'auto', background: '#E91E8C', color: '#fff', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 20 }}>الأكثر مبيعاً</span>
-                )}
-                {!product.is_best_seller && (
-                  <span style={{ marginRight: 'auto', background: '#fce8f5', color: '#8a007a', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 20 }}>الأكثر مبيعاً</span>
-                )}
+                <span style={{ background: '#fce8f5', color: '#8a007a', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 20 }}>
+                  {product.sub_category || 'منتج'}
+                </span>
+                <span style={{ marginRight: 'auto', background: '#fce8f5', color: '#8a007a', fontSize: 11, fontWeight: 700, padding: '3px 10px', borderRadius: 20 }}>الأكثر مبيعاً</span>
               </div>
 
               {/* Name */}
-              <h1 style={{ fontSize: 22, fontWeight: 900, color: '#1a1a1a', margin: '0 0 16px', lineHeight: 1.4 }}>{product.name}</h1>
+              <h1 style={{ fontSize: 22, fontWeight: 900, color: '#1a1a1a', margin: '0 0 12px', lineHeight: 1.4 }}>{product.name}</h1>
+
+              {/* Stars rating */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12 }}>
+                <div style={{ display: 'flex', gap: 2 }}>
+                  {[1,2,3,4,5].map(s => (
+                    <span key={s} style={{ fontSize: 18, color: s <= fullStars ? '#f59e0b' : s === fullStars + 1 && hasHalf ? '#f59e0b' : '#e0e0e0' }}>
+                      {s <= fullStars ? '★' : s === fullStars + 1 && hasHalf ? '⯨' : '☆'}
+                    </span>
+                  ))}
+                </div>
+                <span style={{ fontSize: 14, fontWeight: 700, color: '#333' }}>{rating}</span>
+                <span style={{ fontSize: 13, color: '#aaa' }}>({reviewsCount} تقييم)</span>
+              </div>
+
+              {/* Description short */}
+              <p style={{ fontSize: 13, color: '#777', lineHeight: 1.7, margin: '0 0 16px' }}>
+                {product.description
+                  ? product.description.slice(0, 120) + (product.description.length > 120 ? '...' : '')
+                  : `${product.name} — منتج عالي الجودة متوفر في متجر زورا بأفضل الأسعار.`}
+              </p>
 
               {/* Price */}
               <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, marginBottom: 20 }}>
@@ -180,27 +197,6 @@ export default function ProductPage() {
                 {product.old_price && (
                   <span style={{ fontSize: 16, color: '#bbb', textDecoration: 'line-through' }}>{product.old_price} ج</span>
                 )}
-              </div>
-
-              {product.price_note && (
-                <div style={{ fontSize: 12, color: '#aaa', marginTop: -14, marginBottom: 14 }}>شامل ضريبة القيمة المضافة</div>
-              )}
-
-              {/* Delivery badges */}
-              <div style={{ display: 'flex', gap: 10, marginBottom: 20, flexWrap: 'wrap' }}>
-                {[
-                  { icon: '🚚', text: 'توصيل مجاني', sub: 'خلال 24 ساعة' },
-                  { icon: '✓', text: 'منتج أصلي', sub: 'جودة مضمونة 100%' },
-                  { icon: '↩', text: 'إرجاع مجاني', sub: 'خلال 24 ساعة' },
-                ].map((b, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fafafa', border: '1px solid #f0e0ee', borderRadius: 10, padding: '7px 12px', flex: '1 1 0' }}>
-                    <span style={{ fontSize: 16 }}>{b.icon}</span>
-                    <div>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: '#444' }}>{b.text}</div>
-                      <div style={{ fontSize: 10, color: '#aaa' }}>{b.sub}</div>
-                    </div>
-                  </div>
-                ))}
               </div>
 
               {/* Unit / Stock */}
@@ -277,7 +273,7 @@ export default function ProductPage() {
                 {[
                   { id: 'desc', label: 'الوصف' },
                   { id: 'specs', label: 'المواصفات' },
-                  { id: 'reviews', label: `التقييمات (${product.reviews_count || 256})` },
+                  { id: 'reviews', label: `التقييمات (${reviewsCount})` },
                 ].map(tab => (
                   <button key={tab.id} className="tab-btn" onClick={() => setActiveTab(tab.id)}
                     style={{ color: activeTab === tab.id ? '#E91E8C' : '#888', borderBottom: activeTab === tab.id ? '2px solid #E91E8C' : '2px solid transparent' }}>
@@ -291,16 +287,6 @@ export default function ProductPage() {
                     <p style={{ fontSize: 14, color: '#555', lineHeight: 1.9, marginBottom: 20 }}>
                       {product.description || `${product.name} — منتج عالي الجودة متوفر في متجر زورا.`}
                     </p>
-                    {product.features && (
-                      <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
-                        {product.features.map((f: any, i: number) => (
-                          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                            <span style={{ fontSize: 28 }}>{f.icon || '✓'}</span>
-                            <span style={{ fontSize: 12, color: '#666', fontWeight: 600 }}>{f.label}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
                     {!product.features && (
                       <div style={{ display: 'flex', gap: 32 }}>
                         {[
@@ -310,6 +296,16 @@ export default function ProductPage() {
                         ].map((f, i) => (
                           <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
                             <span style={{ fontSize: 28 }}>{f.icon}</span>
+                            <span style={{ fontSize: 12, color: '#666', fontWeight: 600 }}>{f.label}</span>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    {product.features && (
+                      <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+                        {product.features.map((f: any, i: number) => (
+                          <div key={i} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                            <span style={{ fontSize: 28 }}>{f.icon || '✓'}</span>
                             <span style={{ fontSize: 12, color: '#666', fontWeight: 600 }}>{f.label}</span>
                           </div>
                         ))}
@@ -334,9 +330,31 @@ export default function ProductPage() {
                   </div>
                 )}
                 {activeTab === 'reviews' && (
-                  <div style={{ textAlign: 'center', padding: 24, color: '#888' }}>
-                    <div style={{ fontSize: 40, marginBottom: 8 }}>⭐</div>
-                    <div style={{ fontSize: 14, fontWeight: 600 }}>لا توجد تقييمات بعد</div>
+                  <div>
+                    {/* Rating summary */}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 24, padding: '16px', background: '#fafafa', borderRadius: 12 }}>
+                      <div style={{ textAlign: 'center' }}>
+                        <div style={{ fontSize: 48, fontWeight: 900, color: '#1a1a1a', lineHeight: 1 }}>{rating}</div>
+                        <div style={{ display: 'flex', gap: 2, justifyContent: 'center', margin: '6px 0' }}>
+                          {[1,2,3,4,5].map(s => (
+                            <span key={s} style={{ fontSize: 16, color: s <= fullStars ? '#f59e0b' : '#e0e0e0' }}>★</span>
+                          ))}
+                        </div>
+                        <div style={{ fontSize: 12, color: '#aaa' }}>{reviewsCount} تقييم</div>
+                      </div>
+                      <div style={{ flex: 1 }}>
+                        {[5,4,3,2,1].map(star => (
+                          <div key={star} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
+                            <span style={{ fontSize: 12, color: '#888', width: 10 }}>{star}</span>
+                            <span style={{ color: '#f59e0b', fontSize: 12 }}>★</span>
+                            <div style={{ flex: 1, height: 6, background: '#eee', borderRadius: 4, overflow: 'hidden' }}>
+                              <div style={{ height: '100%', background: '#f59e0b', borderRadius: 4, width: star === 5 ? '70%' : star === 4 ? '20%' : star === 3 ? '6%' : '2%' }} />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'center', padding: 16, color: '#aaa', fontSize: 13 }}>لا توجد تقييمات مكتوبة بعد</div>
                   </div>
                 )}
               </div>
