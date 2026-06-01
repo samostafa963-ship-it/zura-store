@@ -4,6 +4,15 @@ import { useState } from 'react';
 export default function Navbar() {
   const [cartCount, setCartCount] = useState(0);
 
+  const links = [
+    { label: 'الرئيسية', href: '/' },
+    { label: 'الأقسام', href: '/categories' },
+    { label: 'العروض', href: '/offers' },
+    { label: 'Brands', href: '/brands' },
+    { label: 'تتبع الطلب', href: '/track' },
+    { label: 'المساعدة', href: '/help' },
+  ];
+
   return (
     <>
       {/* Topbar */}
@@ -13,7 +22,7 @@ export default function Navbar() {
           <span>📞 19XXX</span>
         </div>
         <div style={{display:'flex',gap:'16px'}}>
-          <a href="#" style={{color:'#fff',textDecoration:'none',opacity:.9}}>تتبع طلبك</a>
+          <a href="/track" style={{color:'#fff',textDecoration:'none',opacity:.9}}>تتبع طلبك</a>
           <a href="#" style={{color:'#fff',textDecoration:'none',opacity:.9}}>تحميل التطبيق</a>
         </div>
       </div>
@@ -21,7 +30,7 @@ export default function Navbar() {
       {/* Nav */}
       <nav style={{background:'#fff',borderBottom:'1px solid #f0e0ee',padding:'0 24px',display:'flex',alignItems:'center',gap:'12px',position:'sticky',top:0,zIndex:200,boxShadow:'0 1px 4px rgba(233,30,140,.06)'}}>
         <div style={{display:'flex',alignItems:'center',gap:'10px',padding:'14px 40px 14px 0',borderLeft:'1px solid #f0e0ee',marginLeft:'16px'}}>
-          <img src="/icon.png" alt="زورا" style={{height:40,objectFit:'contain',marginLeft:8}} />
+          <a href="/"><img src="/icon.png" alt="زورا" style={{height:40,objectFit:'contain',marginLeft:8}} /></a>
         </div>
 
         <div style={{flex:1,display:'flex',alignItems:'center',background:'#f8f0f6',border:'1.5px solid #f0e0ee',borderRadius:10,overflow:'hidden',maxWidth:600}}>
@@ -46,9 +55,12 @@ export default function Navbar() {
 
         {/* Nav Links */}
         <div style={{display:'flex',gap:'4px',borderRight:'1px solid #f0e0ee',paddingRight:'16px'}}>
-          {['الرئيسية','الأقسام','العروض','Brands','تتبع الطلب','المساعدة'].map(l => (
-            <a key={l} href="#" style={{padding:'20px 12px',fontSize:13,color:'#333',textDecoration:'none',fontWeight:500,borderBottom:'2px solid transparent',display:'block'}}>
-              {l}
+          {links.map(l => (
+            <a key={l.label} href={l.href}
+              style={{padding:'20px 12px',fontSize:13,color:'#333',textDecoration:'none',fontWeight:500,borderBottom:'2px solid transparent',display:'block',transition:'color .2s,border-color .2s'}}
+              onMouseEnter={e => { (e.currentTarget as HTMLAnchorElement).style.color='#E91E8C'; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor='#E91E8C'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLAnchorElement).style.color='#333'; (e.currentTarget as HTMLAnchorElement).style.borderBottomColor='transparent'; }}>
+              {l.label}
             </a>
           ))}
         </div>
