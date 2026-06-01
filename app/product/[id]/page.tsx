@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Navbar from '../../components/Navbar';
-
 const API = process.env.NEXT_PUBLIC_API_URL || '';
 
 export default function ProductPage() {
