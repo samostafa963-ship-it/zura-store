@@ -64,10 +64,12 @@ export default function ProductPage() {
     ? Math.round(((product.old_price - product.price) / product.old_price) * 100)
     : null;
 
-  const rating = product.rating || 4.8;
-  const reviewsCount = product.reviews_count || 256;
+  const rating = product.rating || 0;
+  const reviewsCount = product.reviews_count || 0;
   const fullStars = Math.floor(rating);
   const hasHalf = rating - fullStars >= 0.5;
+  const [userRating, setUserRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   return (
     <>
@@ -170,17 +172,25 @@ export default function ProductPage() {
               {/* Name */}
               <h1 style={{ fontSize: 22, fontWeight: 900, color: '#1a1a1a', margin: '0 0 12px', lineHeight: 1.4 }}>{product.name}</h1>
 
-              {/* Stars rating */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 12 }}>
-                <div style={{ display: 'flex', gap: 2 }}>
+              {/* Stars rating - interactive */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+                <div style={{ display: 'flex', gap: 3 }}>
                   {[1,2,3,4,5].map(s => (
-                    <span key={s} style={{ fontSize: 18, color: s <= fullStars ? '#f59e0b' : s === fullStars + 1 && hasHalf ? '#f59e0b' : '#e0e0e0' }}>
-                      {s <= fullStars ? '★' : s === fullStars + 1 && hasHalf ? '⯨' : '☆'}
+                    <span key={s}
+                      onMouseEnter={() => setHoverRating(s)}
+                      onMouseLeave={() => setHoverRating(0)}
+                      onClick={() => setUserRating(s)}
+                      style={{ fontSize: 26, cursor: 'pointer', color: s <= (hoverRating || userRating || fullStars) ? '#f59e0b' : '#e0e0e0', transition: 'color .15s', userSelect: 'none' as any }}>
+                      ★
                     </span>
                   ))}
                 </div>
-                <span style={{ fontSize: 14, fontWeight: 700, color: '#333' }}>{rating}</span>
-                <span style={{ fontSize: 13, color: '#aaa' }}>({reviewsCount} تقييم)</span>
+                {userRating > 0
+                  ? <span style={{ fontSize: 13, color: '#10b981', fontWeight: 600 }}>شكراً على تقييمك!</span>
+                  : reviewsCount > 0
+                    ? <span style={{ fontSize: 13, color: '#aaa' }}>({reviewsCount} تقييم)</span>
+                    : <span style={{ fontSize: 13, color: '#aaa' }}>كن أول من يقيّم</span>
+                }
               </div>
 
               {/* Description short */}
