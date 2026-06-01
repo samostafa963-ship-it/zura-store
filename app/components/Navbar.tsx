@@ -1,8 +1,19 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
   const [cartCount, setCartCount] = useState(0);
+
+  const updateCount = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    setCartCount(cart.reduce((s: number, i: any) => s + i.quantity, 0));
+  };
+
+  useEffect(() => {
+    updateCount();
+    window.addEventListener('cart-updated', updateCount);
+    return () => window.removeEventListener('cart-updated', updateCount);
+  }, []);
 
   const links = [
     { label: 'الرئيسية', href: '/' },
