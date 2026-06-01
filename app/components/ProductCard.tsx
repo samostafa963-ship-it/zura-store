@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface Product {
   _id: string;
@@ -16,27 +16,35 @@ export default function ProductCard({ product, onAdd }: { product: Product; onAd
   const [fav, setFav] = useState(false);
   const [added, setAdded] = useState(false);
 
+  // تحقق من المفضلة عند التحميل
+  useEffect(() => {
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    setFav(wishlist.some((i: any) => i._id === product._id));
+  }, [product._id]);
+
+  const handleFav = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+    const exists = wishlist.some((i: any) => i._id === product._id);
+    const updated = exists
+      ? wishlist.filter((i: any) => i._id !== product._id)
+      : [...wishlist, { ...product }];
+    localStorage.setItem('wishlist', JSON.stringify(updated));
+    setFav(!exists);
+  };
+
   const handleAdd = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-
-    // حفظ في localStorage
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
     const existing = cart.find((i: any) => i._id === product._id);
-    if (existing) {
-      existing.quantity += 1;
-    } else {
-      cart.push({ ...product, quantity: 1 });
-    }
+    if (existing) existing.quantity += 1;
+    else cart.push({ ...product, quantity: 1 });
     localStorage.setItem('cart', JSON.stringify(cart));
-
-    // تحديث عداد السلة في الـ Navbar
     window.dispatchEvent(new Event('cart-updated'));
-
-    // feedback بصري
     setAdded(true);
     setTimeout(() => setAdded(false), 1000);
-
     onAdd(product.name);
   };
 
@@ -55,8 +63,8 @@ export default function ProductCard({ product, onAdd }: { product: Product; onAd
             -{product.discount}%
           </span>
         )}
-        <button onClick={e => { e.preventDefault(); e.stopPropagation(); setFav(!fav); }}
-          style={{ position: 'absolute', top: 6, left: 6, background: '#fff', border: 'none', cursor: 'pointer', width: 26, height: 26, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: fav ? '#E91E8C' : '#ddd' }}>
+        <button onClick={handleFav}
+          style={{ position: 'absolute', top: 6, left: 6, background: '#fff', border: 'none', cursor: 'pointer', width: 26, height: 26, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14, color: fav ? '#E91E8C' : '#ddd', transition: 'color .2s' }}>
           {fav ? '♥' : '♡'}
         </button>
       </div>
