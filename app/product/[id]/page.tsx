@@ -14,6 +14,8 @@ export default function ProductPage() {
   const [activeImg, setActiveImg] = useState(0);
   const [activeTab, setActiveTab] = useState('desc');
   const [toast, setToast] = useState('');
+  const [userRating, setUserRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
 
   useEffect(() => {
     fetch(`${API}/api/products/${id}`)
@@ -68,8 +70,6 @@ export default function ProductPage() {
   const reviewsCount = product.reviews_count || 0;
   const fullStars = Math.floor(rating);
   const hasHalf = rating - fullStars >= 0.5;
-  const [userRating, setUserRating] = useState(0);
-  const [hoverRating, setHoverRating] = useState(0);
 
   return (
     <>
