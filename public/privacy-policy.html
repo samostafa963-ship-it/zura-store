@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سياسة الخصوصية - زورا</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #E91E8C;
+    --primary-light: #fce8f5;
+    --primary-dark: #c4186f;
+    --text: #1A1A1A;
+    --text-muted: #888;
+    --border: #f0f0f0;
+    --bg: #fafafa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Tajawal', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* Header */
+  .header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    padding: 20px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(233,30,140,0.06);
+  }
+
+  .header-inner {
+    max-width: 780px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    background: var(--primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .logo-text {
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--primary);
+  }
+
+  /* Main */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  /* Hero */
+  .hero {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    margin-bottom: 28px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .hero p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .update-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin-top: 16px;
+  }
+
+  /* Section */
+  .section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: var(--primary);
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid var(--primary-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title .num {
+    background: var(--primary);
+    color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+
+  .section p {
+    font-size: 13.5px;
+    color: #444;
+    line-height: 1.85;
+    margin-bottom: 10px;
+  }
+
+  .section p:last-child { margin-bottom: 0; }
+
+  .bullet-list { list-style: none; }
+
+  .bullet-list li {
+    font-size: 13.5px;
+    color: #444;
+    line-height: 1.8;
+    padding: 6px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .bullet-list li::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    background: var(--primary);
+    border-radius: 50%;
+    margin-top: 8px;
+    flex-shrink: 0;
+  }
+
+  .highlight {
+    font-weight: 700;
+    color: var(--text);
+  }
+
+  /* Contact */
+  .contact-card {
+    background: var(--primary-light);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 8px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    font-size: 13.5px;
+    color: #444;
+    border-bottom: 1px solid rgba(233,30,140,0.1);
+  }
+
+  .contact-item:last-child { border-bottom: none; }
+
+  .contact-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin-top: 28px;
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+
+  .footer strong { color: var(--primary); }
+
+  @media (max-width: 600px) {
+    .container { padding: 20px 16px 50px; }
+    .hero { padding: 22px; }
+    .hero h1 { font-size: 22px; }
+    .section { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">ز</div>
+    <span class="logo-text">zura</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-badge">📋 وثيقة رسمية</div>
+    <h1>سياسة الخصوصية</h1>
+    <p>
+      تطبيق زورا هو منصة توصيل منتجات غذائية وبقالة تعمل في جمهورية مصر العربية، مملوكة ومشغّلة من قِبل شركة زورا المسجلة قانونًا بالشهر العقاري المصري برقم 186643.
+      <br><br>
+      نحن نأخذ خصوصيتك بجدية تامة. توضح هذه الوثيقة كيفية جمع بياناتك واستخدامها وحمايتها عند استخدامك لتطبيقنا.
+    </p>
+    <div class="update-tag">🕐 آخر تحديث: مايو 2025</div>
+  </div>
+
+  <!-- 1 -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span> المعلومات التي نجمعها</div>
+    <p>نقوم بجمع المعلومات التالية عند استخدامك لتطبيق زورا:</p>
+    <ul class="bullet-list">
+      <li><span><span class="highlight">معلومات الحساب:</span> الاسم، البريد الإلكتروني، رقم الهاتف عند التسجيل.</span></li>
+      <li><span><span class="highlight">معلومات الطلبات:</span> عنوان التوصيل، تفاصيل المنتجات المطلوبة، وبيانات الدفع.</span></li>
+      <li><span><span class="highlight">معلومات الموقع:</span> موقعك الجغرافي لتحديد منطقة التوصيل المناسبة (بإذنك فقط).</span></li>
+      <li><span><span class="highlight">معلومات الجهاز:</span> نوع الجهاز، نظام التشغيل، ومعرّف الجهاز لأغراض تقنية.</span></li>
+      <li><span><span class="highlight">بيانات الاستخدام:</span> الصفحات التي تزورها وكيفية تفاعلك مع التطبيق.</span></li>
+    </ul>
+  </div>
+
+  <!-- 2 -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span> كيف نستخدم معلوماتك</div>
+    <p>نستخدم المعلومات التي نجمعها للأغراض التالية:</p>
+    <ul class="bullet-list">
+      <li>تنفيذ طلباتك وتوصيلها إليك في الوقت المحدد.</li>
+      <li>التواصل معك بشأن حالة طلبك وتحديثاته.</li>
+      <li>تحسين خدماتنا وتطوير تجربة المستخدم.</li>
+      <li>إرسال إشعارات تتعلق بالعروض والخصومات (بموافقتك).</li>
+      <li>ضمان أمان حسابك والكشف عن أي نشاط مشبوه.</li>
+      <li>الامتثال للمتطلبات القانونية والتنظيمية.</li>
+    </ul>
+  </div>
+
+  <!-- 3 -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span> مشاركة المعلومات مع الأطراف الثالثة</div>
+    <p>نحن لا نبيع أو نؤجر بياناتك الشخصية لأي طرف ثالث. قد نشارك بياناتك في الحالات التالية فقط:</p>
+    <ul class="bullet-list">
+      <li><span><span class="highlight">شركاء التوصيل:</span> لتنفيذ عمليات التوصيل إلى عنوانك.</span></li>
+      <li><span><span class="highlight">مزودو خدمات الدفع:</span> لمعالجة المدفوعات بأمان.</span></li>
+      <li><span><span class="highlight">السلطات القانونية:</span> عند الالتزام بالقانون المصري أو بأمر قضائي.</span></li>
+    </ul>
+    <p style="margin-top:10px">في جميع الحالات، يلتزم شركاؤنا بسرية بياناتك وعدم استخدامها لأغراض أخرى.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span> تسجيل الدخول بجوجل</div>
+    <p>عند استخدام خاصية "تسجيل الدخول بجوجل"، نحصل على:</p>
+    <ul class="bullet-list">
+      <li>اسمك وبريدك الإلكتروني وصورة ملفك الشخصي من حساب جوجل.</li>
+      <li>لا نحصل على كلمة مرور حسابك على جوجل في أي وقت.</li>
+      <li>يمكنك إلغاء صلاحية الوصول في أي وقت من إعدادات حساب جوجل.</li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span> أمان البيانات</div>
+    <p>نتخذ إجراءات أمنية صارمة لحماية بياناتك:</p>
+    <ul class="bullet-list">
+      <li>تشفير جميع البيانات المنقولة باستخدام بروتوكول HTTPS.</li>
+      <li>تخزين كلمات المرور بشكل مشفر ولا يمكن لأحد قراءتها.</li>
+      <li>مراجعة دورية لأنظمة الأمان والحماية.</li>
+      <li>تقييد وصول الموظفين إلى البيانات الشخصية.</li>
+    </ul>
+    <p style="margin-top:10px">رغم التزامنا بأعلى معايير الأمان، لا يمكن ضمان الحماية الكاملة بنسبة 100% عبر الإنترنت.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="section">
+    <div class="section-title"><span class="num">6</span> الاحتفاظ بالبيانات</div>
+    <p>نحتفظ ببياناتك طالما حسابك نشط أو طالما كان ذلك ضروريًا لتقديم خدماتنا. يمكنك طلب حذف حسابك وبياناتك في أي وقت عبر التواصل معنا، وسنقوم بذلك خلال 30 يوم عمل.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span> حقوقك</div>
+    <p>يحق لك في أي وقت:</p>
+    <ul class="bullet-list">
+      <li>الاطلاع على البيانات التي نحتفظ بها عنك.</li>
+      <li>تصحيح أي معلومات غير دقيقة.</li>
+      <li>طلب حذف حسابك وبياناتك الشخصية.</li>
+      <li>الاعتراض على معالجة بياناتك لأغراض التسويق.</li>
+      <li>سحب موافقتك على الحصول على إشعارات ترويجية.</li>
+    </ul>
+    <p style="margin-top:10px">للممارسة هذه الحقوق، تواصل معنا عبر: <strong style="color:var(--primary)">samostafa963@gmail.com</strong></p>
+  </div>
+
+  <!-- 8 -->
+  <div class="section">
+    <div class="section-title"><span class="num">8</span> الخصوصية وحماية الأطفال</div>
+    <p>تطبيق زورا مخصص للمستخدمين الذين تجاوزوا سن 18 عامًا. لا نجمع بيانات الأشخاص دون هذه السن عن قصد. إذا علمنا بوجود بيانات لقاصرين في منظومتنا، سنقوم بحذفها فورًا.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="section">
+    <div class="section-title"><span class="num">9</span> ملفات تعريف الارتباط والتتبع</div>
+    <p>نستخدم تقنيات تشبه ملفات تعريف الارتباط داخل التطبيق لتحسين الأداء وتذكر تفضيلاتك. لا نشارك هذه البيانات مع أي جهة خارجية لأغراض إعلانية.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="section">
+    <div class="section-title"><span class="num">10</span> التغييرات على هذه السياسة</div>
+    <p>قد نقوم بتحديث سياسة الخصوصية هذه من وقت لآخر. في حالة وجود تغييرات جوهرية، سنعلمك عبر إشعار داخل التطبيق أو عبر البريد الإلكتروني. استمرار استخدامك للتطبيق بعد التغييرات يُعدّ موافقةً على السياسة المحدّثة.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="section">
+    <div class="section-title"><span class="num">11</span> التواصل معنا</div>
+    <p>إذا كان لديك أي استفسار حول سياسة الخصوصية هذه، يمكنك التواصل معنا:</p>
+    <div class="contact-card">
+      <div class="contact-item">
+        <div class="contact-icon">📧</div>
+        <span>samostafa963@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📱</div>
+        <span>201030496174+</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🏢</div>
+        <span>زورا — مسجل بالشهر العقاري المصري</span>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📄</div>
+        <span>رقم التسجيل التجاري: 186643</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <p>باستخدامك لتطبيق <strong>زورا</strong>، فأنت توافق على سياسة الخصوصية هذه وعلى جمع واستخدام بياناتك وفقًا لما هو موضح أعلاه.</p>
+    <p style="margin-top:8px">© 2025 زورا — جميع الحقوق محفوظة</p>
+  </div>
+
+</div>
+</body>
+</html>
